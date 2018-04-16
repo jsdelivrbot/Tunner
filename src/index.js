@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import _ from "lodash";
 
 /*import Dependencies */
 import YTSearch from "youtube-api-search";
@@ -14,7 +15,7 @@ import { VideoList } from "./component/video_list";
 import VideoDetails from "./component/video_details";
 
 /*import css classes*/
-import "../style/style.css";
+// import "../style/style.css";
 
 /*Creating const variable  */
 const API_KEY = "AIzaSyCWYBlZXOd3O69LIsjxRWxzjRgL9D8atHo";
@@ -26,8 +27,11 @@ export class App extends React.Component {
       videoData: [],
       checkedVideo: null
     };
+    this.onVideoQuest("Giripremi Mountain");
+  }
 
-    YTSearch({ key: API_KEY, term: "Indira Gandhi" }, videoData => {
+  onVideoQuest(searchText) {
+    YTSearch({ key: API_KEY, term: searchText }, videoData => {
       this.setState({
         videoData: videoData,
         checkedVideo: videoData[0]
@@ -35,33 +39,47 @@ export class App extends React.Component {
       console.log("list Of Searched Videos", this.state.videoData);
     });
   }
+
+  //to set seleceted video data
+  // below can be written in line : onVideoSelectFromList method
+  // onVideoSelectFromList(checkedVideo){
+  //   this.setState({
+  //     checkedVideo:checkedVideo
+  //   })
+  // }
+
   render() {
+    const serachVideoAfter = _.debounce(searchText => {
+      this.onVideoQuest(searchText);
+    });
+
     return (
       <div>
         <Container className="container-fluid content-row">
           <Row>
             <Col>
-              {" "}
               <HeaderBar />
             </Col>
           </Row>
           <Row>
             <Col>
-              {" "}
-              <SearchBar />
+              <SearchBar onQuestTextChange={serachVideoAfter} />
             </Col>
           </Row>
+          <hr className="hr-rule" />
           <Row>
             <Col>
-              <hr />
               <VideoDetails video={this.state.checkedVideo} />
-              <hr />
             </Col>
           </Row>
+          <hr className="hr-rule" />
           <Row>
-            <Col>
-              <VideoList videoData={this.state.videoData} />
-            </Col>
+            <VideoList
+              videoData={this.state.videoData}
+              onVideoSelectFromList={checkedVideo =>
+                this.setState({ checkedVideo })
+              }
+            />
           </Row>
         </Container>
       </div>

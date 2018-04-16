@@ -1,0 +1,62 @@
+.video-edges {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.header-edges {
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.2);
+}
+.hr-rule {
+  box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
+
+.jumbotron {
+  background-color: #fafafa;
+}
+
+@media (min-width: 544px) {
+  .jumbotron {
+    padding: 2rem 2rem !important;
+  }
+}
+
+.jumbotron h1,
+.jumbotron h3 {
+  text-align: right;
+}
+
+.r-display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.c-display-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.extra-padding {
+  padding: 10px;
+}
+
+@media (max-width: 767px) {
+  .myelement {
+    display: none; /* visibility: none; */
+  }
+}
+
+p {
+  word-wrap: break-word;
+}
+
+.is-table-row {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 80%;
+}
+
+.is-table-row > div[class*="col-"] {
+  display: flex;
+}
+
+.card-link {
+  cursor: pointer;
+}

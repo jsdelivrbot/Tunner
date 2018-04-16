@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { Input } from 'reactstrap';
+import { Input } from "reactstrap";
 
 export class SearchBar extends Component {
+  constructor() {
+    super();
+    this.state = {
+      searchText: ""
+    };
+  }
 
-    constructor() {
-        super();
-        this.state = {
-            seachText: ''
-        }
-    }
+  onQuestTextEnter(searchText) {
+    this.setState({
+      searchText: searchText
+    });
+    this.props.onQuestTextChange(this.state.searchText);
+  }
 
-    onFieldChange(event) {
-        this.setState({
-            seachText: event.target.value
-        })
-    }
-
-    render() {
-        return (
-            <div>
-                <Input
-                    placeholder="Search Vedio"
-                    onChange={this.onFieldChange.bind(this)} />
-                {this.state.seachText}
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <Input
+          placeholder="Search More...."
+          onChange={event => this.onQuestTextEnter(event.target.value)}
+        />
+      </div>
+    );
+  }
 }
